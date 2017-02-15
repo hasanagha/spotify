@@ -53,6 +53,7 @@ p.error {
 
 img.thumb {
 	padding-right: 15px;
+  max-width: 64px;
 }
 
 .form-control:focus {
