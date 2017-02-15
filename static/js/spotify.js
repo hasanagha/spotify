@@ -26,6 +26,7 @@
         {
             var _this = this;
 
+            // Even if user hit enter on search field, do search.
             $(SELECTORS.search_field).keypress(function (e) {
                 if (e.which == 13) {
                     $(SELECTORS.search).click();
@@ -33,6 +34,7 @@
                 }
             });
 
+            // On search click, Send a request with user selections.
             $('body').on("click", SELECTORS.search, function(){
                 var val = $(SELECTORS.search_field).val();
 
@@ -57,6 +59,8 @@
                 });
             });
         },
+
+        // Parse the response from backend and create a template to show it to the user.
         fillResults: function(response) {
             var _this = this;
             var counter = 0;
@@ -89,6 +93,7 @@
             $(SELECTORS.results).html(html);
         },
 
+        // Creates an <li> to with the provided label and image url
         getLI: function(label, image) {
             var template = TEMPLATE;
 

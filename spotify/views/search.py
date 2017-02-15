@@ -1,15 +1,24 @@
+"""
+View to do search by hitting Spotify API Endpoints.
+"""
+
+# Standard libraries
 import json
 import requests
 
+# django
 from django.views.generic import View
 from django.http import JsonResponse
 
+# local
 from main.settings import SPOTIFY_API_URL
+from main.mixins import AjaxViewMixin
 
 
-class SearchView(View):
+class SearchView(AjaxViewMixin, View):
 
     def get(self, request, search_type, *args, **kwargs):
+        """ Get user's selections and return json response """
 
         # get search term
         search_term = self.request.GET.get('search_term')
@@ -19,6 +28,7 @@ class SearchView(View):
         return JsonResponse(records, safe=False)
 
     def get_result_from_spotify(self, search_type, search_term):
+        """ Hit spotify, convert response into json and return """
         data = {
             'status': True,
             'records': ''

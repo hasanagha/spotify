@@ -1,3 +1,6 @@
+""" Home page view """
+
+# django
 from django.views.generic import TemplateView
 
 
