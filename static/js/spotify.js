@@ -65,18 +65,22 @@
             if(response.status) {
                 var records = response.records[Object.keys(response.records)[0]];
                 counter = records.total;
-                $.each(records.items, function(){
+                if(counter) {
+                    $.each(records.items, function(){
 
-                    var image = SELECTORS.default_image;
-                    var images = this.images;
+                        var image = SELECTORS.default_image;
+                        var images = this.images;
 
-                    if(images.length) {
-                        image = images.pop();
-                        image = image.url;
-                    }
+                        if(images.length) {
+                            image = images.pop();
+                            image = image.url;
+                        }
 
-                    html += _this.createLi(this.name, image);                    
-                });
+                        html += _this.getLI(this.name, image);
+                    });
+                } else {
+                    html = 'No record found';
+                }
             } else {
                 html = 'error' in response?response.error:'No record found';
             }
@@ -85,7 +89,7 @@
             $(SELECTORS.results).html(html);
         },
 
-        createLi: function(label, image) {
+        getLI: function(label, image) {
             var template = TEMPLATE;
 
             var li = template.replace('{label}', label);
